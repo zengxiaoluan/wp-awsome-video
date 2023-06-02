@@ -74,6 +74,16 @@ add_action(
     99999
 );
 
+// Show posts of 'post', 'page' and 'courses' post types on home page
+function add_my_post_types_to_query($query)
+{
+    if (is_home() && $query->is_main_query()) {
+        $query->set('post_type', ['post', 'page', 'video']);
+    }
+    return $query;
+}
+add_action('pre_get_posts', 'add_my_post_types_to_query');
+
 add_action(
     'wp_enqueue_scripts',
     function () {
@@ -243,11 +253,6 @@ add_action(
         );
 
         if (isset($_GET['print-pdf'])) {
-            // wp_add_inline_script(
-            // 	'slide-reveal',
-            // 	'window.print()'
-            // );
-
             wp_enqueue_style(
                 'slide-reveal-pdf',
                 plugins_url('reveal/pdf.min.css', __FILE__),
@@ -290,7 +295,7 @@ foreach (['load-post.php', 'load-post-new.php'] as $tag) {
     add_action(
         $tag,
         function () {
-            if (get_current_screen()->post_type !== 'presentation') {
+            if (get_current_screen()->post_type !== 'video') {
                 return;
             }
 
