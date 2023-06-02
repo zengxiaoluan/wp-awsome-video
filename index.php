@@ -155,7 +155,7 @@ add_action(
                 substr($info->src, 0, strlen($template_directory_uri)) ===
                 $template_directory_uri
             ) {
-                wp_dequeue_style($handle);
+                // wp_dequeue_style($handle);
             }
         }
 
