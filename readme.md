@@ -1,28 +1,23 @@
-# Slides & Presentations
+# AwesomeWeb
 
-    Contributors:      ellatrix, wordpressdotorg
-    Tags:              presentations, slides, powerpoint, keynote
-    Requires at least: 5.3
-    Requires PHP:      5.6
-    Tested up to:      5.3
-    Stable tag:        0.0.39
-    License:           GPL-2.0-or-later
-    License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+## 里程碑1
 
-Allows you to create presentations with the WordPress block editor.
+用web技术搭建的一个无版权视频，音乐，图片，电子书，播客，博客rss，阅读网站，愉快的上网冲浪吧，只在一个App就够了!
 
-## Description
+## 里程碑2
 
-**This plugin requires WordPress version 5.3 or higher! It works best if you also have the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin installed and up-to-date.**
+制作作品发布和交易系统
 
-Report issues, or collaborate, on [Github](https://github.com/ellatrix/slides/issues).
+## 里程碑3
 
-* Creates a custom post type "Presentation", which will render as a presentation on the front end using [Reveal.js](https://revealjs.com).
-* Enables the block editor with a "Slide" block, which can be used as a container for each slide in the presentation.
-* You can add background colors, gradients, images, even iframes for the whole presentation, but also per slide.
-* You can select a font, color, and size.
-* If that's not enough, you can always add some custom CSS!
-* You can import a custom font by adding `@import url('https://fonts.googleapis.com/css?family=...');` above any other rules in the CSS input field.
-* It's possible to include some notes with every slide.
-* You can enter a speaker view which will show the current slide, next slide, notes and timers.
-* A lot more options coming soon!
+接入区块链，让作品版权上链
+
+## 里程碑4
+
+推广此App，核心理念：投资你看好的作品，让它为你赚取睡后收入，以及卖出大价钱，展现你的投资眼光。
+
+App通过赚取每笔作品交易的手续费盈利
+
+## 里程碑5
+
+为此App发币，持币者可以分享App的营收，以及参与治理App

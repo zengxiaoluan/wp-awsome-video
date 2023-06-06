@@ -1,19 +1,26 @@
 {
-    "name": "slides",
-    "devDependencies": {
-        "parcel-bundler": "^1.12.4",
-        "semistandard": "*"
-    },
-    "semistandard": {
-        "ignore": [
-            "index.js"
-        ]
-    },
-    "scripts": {
-        "test": "semistandard --fix",
-        "start": "parcel watch src/entry.js -d ./ --out-file index.js",
-        "build": "parcel build src/entry.js --no-minify -d ./ --out-file index.js",
-        "svn-checkout": "svn checkout https://plugins.svn.wordpress.org/slide/trunk svn && rm -rf .svn && mv svn/.svn .svn && rm -rf svn",
-        "svn-ignore": "svn propset svn:ignore -F .svnignore ."
-    }
+  "name": "react-typescript",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "React TypeScript on Replit, using Vite bundler",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.4"
+  },
+  "dependencies": {
+    "hls.js": "^1.4.4"
+  }
 }
