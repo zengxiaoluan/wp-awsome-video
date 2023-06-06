@@ -87,17 +87,9 @@ add_action('pre_get_posts', 'add_my_post_types_to_query');
 add_action(
     'wp_enqueue_scripts',
     function () {
-        // if (!is_singular('video')) {
-        return;
-        // }
-
-        wp_deregister_style('wp-block-library-theme');
-        wp_register_style(
-            'wp-block-library-theme',
-            plugins_url('common.css', __FILE__),
-            [],
-            filemtime(dirname(__FILE__) . '/common.css')
-        );
+        if (!is_singular('video')) {
+            return;
+        }
     },
     99999
 );
@@ -171,9 +163,9 @@ add_action(
 
         wp_enqueue_script(
             'video',
-            plugins_url('video.js', __FILE__),
+            plugins_url('./dist/video.js', __FILE__),
             [],
-            filemtime(dirname(__FILE__) . '/video.js'),
+            filemtime(dirname(__FILE__) . '/dist/video.js'),
             true
         );
 
