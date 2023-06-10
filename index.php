@@ -11,69 +11,6 @@
  * License:     GPL-2.0+
  */
 
-add_action(
-    'admin_enqueue_scripts',
-    function () {
-        if (get_post_type() !== 'presentation') {
-            return;
-        }
-
-        wp_enqueue_code_editor(['type' => 'text/css']);
-
-        wp_enqueue_script(
-            'slide',
-            plugins_url('index.js', __FILE__),
-            [
-                'wp-element',
-                'wp-i18n',
-                'wp-blocks',
-                'wp-rich-text',
-                'wp-plugins',
-                'wp-edit-post',
-                'wp-data',
-                'wp-components',
-                'wp-block-editor',
-                'wp-url',
-                'wp-compose',
-                'wp-hooks',
-            ],
-            filemtime(dirname(__FILE__) . '/index.js'),
-            true
-        );
-
-        wp_enqueue_style(
-            'slide',
-            plugins_url('index.css', __FILE__),
-            [],
-            filemtime(dirname(__FILE__) . '/index.css')
-        );
-
-        wp_deregister_style('wp-block-library-theme');
-        wp_register_style(
-            'wp-block-library-theme',
-            plugins_url('common.css', __FILE__),
-            [],
-            filemtime(dirname(__FILE__) . '/common.css')
-        );
-
-        global $wp_styles;
-
-        $template_directory_uri = get_template_directory_uri();
-
-        foreach ($wp_styles->queue as $handle) {
-            $info = $wp_styles->registered[$handle];
-
-            if (
-                substr($info->src, 0, strlen($template_directory_uri)) ===
-                $template_directory_uri
-            ) {
-                wp_dequeue_style($handle);
-            }
-        }
-    },
-    99999
-);
-
 // Show posts of 'post', 'page' and 'courses' post types on home page
 function add_my_post_types_to_query($query)
 {
@@ -83,16 +20,6 @@ function add_my_post_types_to_query($query)
     return $query;
 }
 add_action('pre_get_posts', 'add_my_post_types_to_query');
-
-add_action(
-    'wp_enqueue_scripts',
-    function () {
-        if (!is_singular('video')) {
-            return;
-        }
-    },
-    99999
-);
 
 add_action('init', function () {
     require 'register.php';
@@ -170,115 +97,6 @@ add_action(
         );
 
         return;
-        wp_enqueue_script(
-            'slide-template',
-            plugins_url('template.js', __FILE__),
-            ['slide-reveal', 'slide-reveal-notes', 'wp-i18n'],
-            filemtime(dirname(__FILE__) . '/template.js'),
-            true
-        );
-
-        $post_id = get_the_ID();
-        $contain =
-            (bool) get_post_meta($post_id, 'presentation-contain', true) ?:
-            false;
-
-        wp_localize_script('slide-template', 'slideTemplate', [
-            'revealSettings' => [
-                'transition' =>
-                    get_post_meta($post_id, 'presentation-transition', true) ?:
-                    'none',
-                'backgroundTransition' =>
-                    get_post_meta(
-                        $post_id,
-                        'presentation-background-transition',
-                        true
-                    ) ?:
-                    'none',
-                'transitionSpeed' =>
-                    get_post_meta(
-                        $post_id,
-                        'presentation-transition-speed',
-                        true
-                    ) ?:
-                    'default',
-                'controls' =>
-                    (bool) get_post_meta(
-                        $post_id,
-                        'presentation-controls',
-                        true
-                    ) ?:
-                    false,
-                'progress' =>
-                    (bool) get_post_meta(
-                        $post_id,
-                        'presentation-progress',
-                        true
-                    ) ?:
-                    false,
-                'hash' => true,
-                'history' => true,
-                'preloadIframes' => true,
-                'hideAddressBar' => true,
-                'height' => 720,
-                'width' =>
-                    (int) get_post_meta($post_id, 'presentation-width', true) ?:
-                    960,
-                'margin' => $contain ? 0 : 0.08,
-                'keyboard' => [
-                    '38' => 'prev',
-                    '40' => 'next',
-                ],
-                'overview' => false,
-                // We center in CSS.
-                'center' => false,
-                'pdfMaxPagesPerSlide' => 1,
-            ],
-            'contain' => $contain,
-        ]);
-
-        wp_enqueue_style(
-            'slide-reveal',
-            plugins_url('reveal/reveal.min.css', __FILE__),
-            [],
-            '3.8.0'
-        );
-
-        if (isset($_GET['print-pdf'])) {
-            wp_enqueue_style(
-                'slide-reveal-pdf',
-                plugins_url('reveal/pdf.min.css', __FILE__),
-                [],
-                '3.8.0'
-            );
-        }
-
-        $font_url = get_post_meta(
-            get_the_ID(),
-            'presentation-font-family-url',
-            true
-        );
-
-        if ($font_url) {
-            wp_enqueue_style('slide-default-font', $font_url, []);
-        }
-
-        $heading_font_url = get_post_meta(
-            get_the_ID(),
-            'presentation-font-family-heading-url',
-            true
-        );
-
-        if ($heading_font_url) {
-            wp_enqueue_style('slide-heading-font', $heading_font_url, []);
-        }
-
-        wp_enqueue_style(
-            'slide-common',
-            plugins_url('common.css', __FILE__),
-            [],
-            filemtime(dirname(__FILE__) . '/common.css')
-        );
     },
     99999
 );
@@ -334,7 +152,7 @@ foreach (['load-post.php', 'load-post-new.php'] as $tag) {
 add_filter(
     'block_editor_settings',
     function ($settings) {
-        if (get_current_screen()->post_type !== 'presentation') {
+        if (get_current_screen()->post_type !== 'video') {
             return $settings;
         }
 

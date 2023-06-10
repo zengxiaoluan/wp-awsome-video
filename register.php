@@ -5,14 +5,14 @@ register_post_type('video', [
         'name' => _x('Videos', 'Post type general name', 'slide'),
         'singular_name' => _x('Video', 'Post type singular name', 'slide'),
         'menu_name' => _x('Videos', 'Admin Menu text', 'slide'),
-        'name_admin_bar' => _x('Presentation', 'Add New on Toolbar', 'slide'),
+        'name_admin_bar' => _x('Video', 'Add New on Toolbar', 'slide'),
         'add_new' => __('Add New', 'slide'),
-        'add_new_item' => __('Add New Presentation', 'slide'),
-        'new_item' => __('New Presentation', 'slide'),
+        'add_new_item' => __('Add New Video', 'slide'),
+        'new_item' => __('New Video', 'slide'),
         'edit_item' => __('Edit Video', 'slide'),
         'view_item' => __('View Video', 'slide'),
         'all_items' => __('All Videos', 'slide'),
-        'search_items' => __('Search Presentations', 'slide'),
+        'search_items' => __('Search Video', 'slide'),
         'parent_item_colon' => __('Parent Presentations:', 'slide'),
         'not_found' => __('No videos found.', 'slide'),
         'not_found_in_trash' => __('No presentations found in Trash.', 'slide'),
@@ -85,41 +85,14 @@ register_post_type('video', [
         'thumbnail',
         'excerpt',
         'custom-fields',
+        'comments',
         // 'revisions',
     ],
     'show_in_rest' => true,
 ]);
 
-foreach (
-    [
-        'css',
-        'color',
-        'background-color',
-        'background-gradient',
-        'background-url',
-        'background-id',
-        'background-position',
-        'background-opacity',
-        'font-size',
-        'font-family',
-        'font-family-url',
-        'font-family-heading',
-        'font-family-heading-url',
-        'font-weight-heading',
-        'transition',
-        'background-transition',
-        'transition-speed',
-        'controls',
-        'progress',
-        'width',
-        'horizontal-padding',
-        'vertical-padding',
-        'color-palette',
-        'contain',
-    ]
-    as $key
-) {
-    register_post_meta('presentation', "presentation-$key", [
+foreach (['线路一', '线路二', '封面图片'] as $key) {
+    register_post_meta('video', "$key", [
         'show_in_rest' => true,
         'single' => true,
         'type' => 'string',
