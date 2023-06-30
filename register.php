@@ -86,8 +86,10 @@ register_post_type('video', [
         'excerpt',
         'custom-fields',
         'comments',
+        // 'page-attributes',
         // 'revisions',
     ],
+    'taxonomies'         => array(/*'category',*/ 'post_tag'),
     'show_in_rest' => true,
 ]);
 

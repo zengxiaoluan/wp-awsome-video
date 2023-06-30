@@ -14,7 +14,7 @@
 // Show posts of 'post', 'page' and 'courses' post types on home page
 function add_my_post_types_to_query($query)
 {
-    if (is_home() && $query->is_main_query()) {
+    if ($query->is_main_query()) {
         $query->set('post_type', ['post', 'page', 'video']);
     }
     return $query;
